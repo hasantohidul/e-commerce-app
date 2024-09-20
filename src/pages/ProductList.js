@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { products } from "../mockData";
 import ProductCard from "../components/ProductCard";
 
-const ProductList = () => {
+const ProductList = ({handleAddToCart}) => {
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState("price");
 
@@ -45,7 +45,7 @@ const ProductList = () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sortedProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} handleAddToCart={handleAddToCart} />
         ))}
       </div>
     </div>
