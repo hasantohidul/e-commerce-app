@@ -1,6 +1,12 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../redux/cartSlice";
 
-const Cart = ({cartItems,handleRemoveFromCart}) => {
+const Cart = () => {
+    const dispatch = useDispatch();
+    const cartItems = useSelector(state => state.cart.cartItems)
+
+    const handleRemoveFromCart = item => dispatch(removeFromCart(item));
     const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (

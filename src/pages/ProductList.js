@@ -1,23 +1,19 @@
-import React, { useState } from "react";
-import { products } from "../mockData";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/ProductCard";
+import { filterByCategory, sortBy } from "../redux/productSlice";
 
-const ProductList = ({handleAddToCart}) => {
-  const [filter, setFilter] = useState("all");
-  const [sort, setSort] = useState("price");
+const ProductList = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.filteredProducts);
 
-  const filteredProducts = products.filter((product) => {
-    return filter === "all" || filter === product.category;
-  });
+  const handleCategoryChange = (e) => {
+    dispatch(filterByCategory(e.target.value));
+  };
 
-  const sortedProducts = filteredProducts.sort((a, b) => {
-    if (sort === "price") {
-      return a.price - b.price;
-    } else if (sort === "rating") {
-      return b.rating - a.rating;
-    }
-    return 0;
-  });
+  const handleSortByChange = (e) => {
+    dispatch(sortBy(e.target.value));
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -26,7 +22,7 @@ const ProductList = ({handleAddToCart}) => {
       {/* Filtering options */}
       <div className="mb-4">
         <label className="mr-2">Filter by category</label>
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <select onChange={handleCategoryChange}>
           <option value="all">All</option>
           <option value="Electronics">Electronics</option>
           <option value="Wearables">Wearables</option>
@@ -36,7 +32,7 @@ const ProductList = ({handleAddToCart}) => {
       {/* sorting options */}
       <div className="mb-4">
         <label className="mr-2">Sort by:</label>
-        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+        <select onChange={handleSortByChange}>
           <option value="price">Price</option>
           <option value="rating">Rating</option>
         </select>
@@ -44,8 +40,8 @@ const ProductList = ({handleAddToCart}) => {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {sortedProducts.map((product) => (
-          <ProductCard key={product.id} product={product} handleAddToCart={handleAddToCart} />
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

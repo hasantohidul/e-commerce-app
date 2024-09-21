@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
 
-const ProductCard = ({ product, handleAddToCart }) => {
+const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="bg-white shadow-md rounded-lg p-4">
       <img
@@ -14,7 +18,7 @@ const ProductCard = ({ product, handleAddToCart }) => {
       <p className="text-yellow-500">Rating: {product.rating} ⭐</p>
       <button
         className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-600"
-        onClick={() => handleAddToCart(product)}
+        onClick={() => dispatch(addToCart(product))}
       >
         Add to Cart
       </button>
