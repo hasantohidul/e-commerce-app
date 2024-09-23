@@ -7,6 +7,7 @@ This is a dynamic e-commerce application built using React, Redux, and Tailwind 
 - [E-Commerce Application](#e-commerce-application)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
+  - [Live Demo](#live-demo)
   - [Features](#features)
   - [Technologies Used](#technologies-used)
   - [Installation](#installation)
@@ -26,6 +27,9 @@ This e-commerce application provides users with the ability to:
 - Add items to a shopping cart
 - Remove items from shopping cart
 - See the total price and updates in real time as they modify their cart
+
+## Live Demo
+Check out the live demo of the application [here](https://hasantohidul-e-commerce-app.netlify.app/).
 
 ## Features
 
